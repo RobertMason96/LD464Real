@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pickup
+  - SnakePart
+  - SnakeHead
+  - SnakeTail
+  - Food
+  - World
   layers:
   - Default
   - TransparentFX
@@ -17,6 +22,8 @@ TagManager:
   - Player
   - Holding
   - Ignore Layers
+  - SnakeHead
+  - 
   - 
   - 
   - 
