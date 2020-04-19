@@ -124,9 +124,8 @@ public class SnakeMove : MonoBehaviour
         TileController tC = temp.transform.parent.gameObject.GetComponent<TileController>();
         if (tC != null)
         {
-            tC.createNewFood();
+            tC.replaceFood(temp);
         }
-        Destroy(temp.transform.gameObject);
 
         DeBody.Add(DeBody[DeBody.Count - 1]);
         DeBody[DeBody.Count - 2] = Instantiate(BodyPart, DeBody[DeBody.Count - 1].transform.position, DeBody[DeBody.Count - 1].transform.rotation);
@@ -157,6 +156,23 @@ public class SnakeMove : MonoBehaviour
                 Debug.Log("Dead");
                 Debug.Log((DeBody.Count - 3));
             }
+
+            GameObject[] F = GameObject.FindGameObjectsWithTag("Food");
+            if (F.Length != 0)
+            {
+                foreach (GameObject gObj in F)
+                {
+                    moveDir = new Vector3(gObj.transform.position.x - newPos.x, newPos.y, gObj.transform.position.z - newPos.z);
+
+                    if (Mathf.Abs(moveDir.x) < gridSize && Mathf.Abs(moveDir.z) < gridSize)
+                    {
+
+                        foodEatten(gObj);
+
+                    }
+                }
+            }
+
         }
     }
 
