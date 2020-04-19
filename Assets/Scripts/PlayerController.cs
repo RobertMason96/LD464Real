@@ -18,9 +18,26 @@ public class PlayerController : MonoBehaviour
     public float friction = 0f;
     public float airFriction = 5f;
 
+    public float pickupLength = 2f;
+
+    public float collisionLength = 2f;
+    public LayerMask phignorelayer;
+
     public GameObject holderObject = null;
     public float jumpHeight =1.5f;
     public Transform holderempty;
+    float deltaRay = 0.1f;
+
+    public float crashTime = 0.2f;
+
+    bool canMove = true;
+
+
+    public AudioClip pain;
+
+    public float pushBackForce = 15f;
+
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,55 +49,42 @@ public class PlayerController : MonoBehaviour
                 holderempty = t;
             }
         }
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        inplaneInput = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.A))
+        if(canMove)
         {
-            inplaneInput.x--;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            inplaneInput.x++;
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            inplaneInput.y++;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            inplaneInput.y--;
-        }
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * jumpHeight, Color.yellow);
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("DOWN");
-            // Bit shift the index of the layer (8) to get a bit mask
-            int layerMask = 1 << 8;
-
-            // This would cast rays only against colliders in layer 8.
-            // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
-            layerMask = ~layerMask;
             
+            inplaneInput = new Vector2(0, 0);
 
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit,jumpHeight, layerMask))
+
+            if (Input.GetKey(KeyCode.A))
             {
-                jump = true;                
-                Debug.Log("Did Hit");
+                inplaneInput.x--;
             }
-            
-            
-        }            
-        
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            if(holderObject==null)
+            if (Input.GetKey(KeyCode.D))
             {
+                inplaneInput.x++;
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                inplaneInput.y++;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                inplaneInput.y--;
+            }
+
+
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * jumpHeight, Color.yellow);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * pickupLength, Color.red);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * collisionLength, Color.blue);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("DOWN");
                 // Bit shift the index of the layer (8) to get a bit mask
                 int layerMask = 1 << 8;
 
@@ -90,44 +94,81 @@ public class PlayerController : MonoBehaviour
 
 
                 // Does the ray intersect any objects excluding the player layer
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity, layerMask))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit, jumpHeight, layerMask))
                 {
-                    if (hit.transform.tag == "Pickup")
-                    {
-                        holderObject = hit.transform.gameObject;
-                        Debug.Log("Did Pickup Hit");
+                    jump = true;
 
-                        holderObject.layer = LayerMask.NameToLayer("Holding");
+                }
+
+
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (holderObject == null)
+                {
+                    // Bit shift the index of the layer (8) to get a bit mask
+                    int layerMask = 1 << 8;
+
+                    // This would cast rays only against colliders in layer 8.
+                    // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
+                    layerMask = ~layerMask;
+
+
+                    // Does the ray intersect any objects excluding the player layer
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, pickupLength, layerMask))
+                    {
+                        if (hit.transform.tag == "Pickup")
+                        {
+                            holderObject = hit.transform.gameObject;
+                            holderObject.layer = LayerMask.NameToLayer("Player");
+                            
+
+                            
+                        }
+                        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+
                     }
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                    Debug.Log("Did Hit");
+                    else
+                    {
+                        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+
+                    }
+
                 }
                 else
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-                    Debug.Log("Did not Hit");
+
+                    
+                    
+                    holderObject.layer = LayerMask.NameToLayer("Default");
+
+                    holderObject = null;
+                    
                 }
-
             }
-            else
+            if (holderObject != null)
             {
+                holderObject.transform.position = holderempty.position;
+                holderObject.transform.rotation = holderempty.rotation;
+
                 
-                //if (holderObject.GetComponent<Collider>() != null)
-                //{
-                    //holderObject.GetComponent<Collider>().enabled = true;
-                //}
-                holderObject.layer = LayerMask.NameToLayer("Default");
-                holderObject = null;
+
+               
+
+                
+
+
             }
         }
 
-        if(holderObject!=null)
-        {
-            holderObject.transform.position = holderempty.position;
-            holderObject.transform.rotation = holderempty.rotation;
-        }
+        
+
+        
         
     }
+
+   
+
     public void FixedUpdate()
     {
 
