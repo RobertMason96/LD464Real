@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float airFriction = 5f;
 
     public GameObject holderObject = null;
-    public float jumpHeight =1f;
+    public float jumpHeight =1.5f;
     public Transform holderempty;
     // Start is called before the first frame update
     void Start()
@@ -54,7 +54,8 @@ public class PlayerController : MonoBehaviour
         {
             inplaneInput.y--;
         }
-        //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 100f, Color.yellow);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * jumpHeight, Color.yellow);
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("DOWN");
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
             // This would cast rays only against colliders in layer 8.
             // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
             layerMask = ~layerMask;
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * jumpHeight, Color.yellow);
+            
 
             // Does the ray intersect any objects excluding the player layer
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out RaycastHit hit,jumpHeight, layerMask))
