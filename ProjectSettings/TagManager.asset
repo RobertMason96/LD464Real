@@ -8,6 +8,8 @@ TagManager:
   - SnakePart
   - SnakeHead
   - SnakeTail
+  - Food
+  - World
   layers:
   - Default
   - TransparentFX
