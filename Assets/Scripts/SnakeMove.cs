@@ -42,6 +42,7 @@ public class SnakeMove : MonoBehaviour
         }
         timer += Time.deltaTime;
     }
+
     private void getDirections()
     {
         if (food != null)
@@ -52,7 +53,7 @@ public class SnakeMove : MonoBehaviour
             if (Mathf.Abs(moveDir.x) < gridSize && Mathf.Abs(moveDir.z) < gridSize)
             {
                 foodEatten(food);
-                Debug.Log(movementDirection);
+                
             }
             else
             {
@@ -140,7 +141,6 @@ public class SnakeMove : MonoBehaviour
 
         Vector3 moveDir = movementDirection;
 
-        CheckAhead(moveDir);
 
         DeBody[0].transform.position += moveDir;
         DeBody[0].transform.rotation = Quaternion.Euler(getAngle(moveDir));
@@ -152,6 +152,11 @@ public class SnakeMove : MonoBehaviour
             DeBody[i].transform.position = oldPos;
             DeBody[i].transform.rotation = Quaternion.Euler(getAngle(moveDir));
             oldPos = newPos;
+            if(newPos == DeBody[0].transform.position)
+            {
+                Debug.Log("Dead");
+                Debug.Log((DeBody.Count - 3));
+            }
         }
     }
 
@@ -178,31 +183,4 @@ public class SnakeMove : MonoBehaviour
         }
         return temp;
     }
-
-    private void CheckAhead(Vector3 direction)
-    {
-        int layerMask = ~(1 << 9);
-        RaycastHit hit;
-        if (Physics.Raycast(DeBody[0].transform.position , direction, out hit, 1.5f * gridSize, layerMask))
-        {
-            itHit(hit);
-        }else if(Physics.Raycast(DeBody[0].transform.position + (DeBody[0].transform.forward * (0.5f * gridSize)), direction, out hit, 1.5f * gridSize, layerMask))
-        {
-            itHit(hit);
-        }
-        else if (Physics.Raycast(DeBody[0].transform.position - (DeBody[0].transform.forward * (0.5f * gridSize)), direction, out hit, 1.5f * gridSize, layerMask))
-        {
-            itHit(hit);
-        }
-
-    }
-
-    private void itHit(RaycastHit hit)
-    {
-        if (hit.transform.tag == "SnakePart" || hit.transform.tag == "SnakeTail")
-        {
-            Debug.Log("Dead");
-        }
-    }
-
 }
