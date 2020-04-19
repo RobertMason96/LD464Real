@@ -96,14 +96,8 @@ public class PlayerController : MonoBehaviour
                     {
                         holderObject = hit.transform.gameObject;
                         Debug.Log("Did Pickup Hit");
-                        if(holderObject.GetComponent<Rigidbody>()!=null)
-                        {
-                            holderObject.GetComponent<Rigidbody>().isKinematic = true;
-                        }
-                        if (holderObject.GetComponent<Collider>() != null)
-                        {
-                            holderObject.GetComponent<Collider>().enabled = false;
-                        }
+
+                        holderObject.layer = LayerMask.NameToLayer("Holding");
                     }
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                     Debug.Log("Did Hit");
@@ -117,14 +111,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (holderObject.GetComponent<Rigidbody>() != null)
-                {
-                    holderObject.GetComponent<Rigidbody>().isKinematic = false;
-                }
-                if (holderObject.GetComponent<Collider>() != null)
-                {
-                    holderObject.GetComponent<Collider>().enabled = true;
-                }
+                
+                //if (holderObject.GetComponent<Collider>() != null)
+                //{
+                    //holderObject.GetComponent<Collider>().enabled = true;
+                //}
+                holderObject.layer = LayerMask.NameToLayer("Default");
                 holderObject = null;
             }
         }
