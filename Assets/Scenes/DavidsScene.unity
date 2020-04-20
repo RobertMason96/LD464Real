@@ -620,12 +620,12 @@ PrefabInstance:
     - target: {fileID: 4994079890711640947, guid: b7d06569109f1bc4093b8fd95361deb5,
         type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4994079890711640947, guid: b7d06569109f1bc4093b8fd95361deb5,
         type: 3}
       propertyPath: force
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4994079890711640947, guid: b7d06569109f1bc4093b8fd95361deb5,
         type: 3}
@@ -659,6 +659,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6102635158198402801, guid: df707a703fd230f4384fa75e9d4ec530,
         type: 3}
+    - target: {fileID: 1361993405, guid: f5b25df2679c3d7449400feae2c3b877, type: 3}
+      propertyPath: initialSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361993405, guid: f5b25df2679c3d7449400feae2c3b877, type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361993405, guid: f5b25df2679c3d7449400feae2c3b877, type: 3}
+      propertyPath: gridSize
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3628565827265971782, guid: f5b25df2679c3d7449400feae2c3b877,
         type: 3}
       propertyPath: m_LocalPosition.x

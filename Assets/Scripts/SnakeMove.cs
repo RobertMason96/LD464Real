@@ -6,8 +6,12 @@ public class SnakeMove : MonoBehaviour
 {
     private List<GameObject> DeBody;
     public GameObject BodyPart;
-    public float moveSpeed;
+    private float moveSpeed;
+    public float initialSpeed;
+    public float maxSpeed;
+    private float hunger;
     private float timer;
+    private bool Dead;
 
     //Spacing of the grid in the world
     public float gridSize;
@@ -24,6 +28,9 @@ public class SnakeMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Dead = false;
+        hunger = 0;
+        moveSpeed = initialSpeed;
         DeBody = new List<GameObject>();
         DeBody.Add(GameObject.FindGameObjectWithTag("SnakeHead"));
         DeBody.Add(GameObject.FindGameObjectWithTag("SnakePart"));
@@ -39,9 +46,18 @@ public class SnakeMove : MonoBehaviour
     {
         if(timer >= (2 / moveSpeed))
         {
-            food = findFood();
-            getDirections();
-            moveSnake();
+            if (!Dead)
+            {
+                changeSpeed();
+                food = findFood();
+                getDirections();
+                moveSnake();
+            }
+            else
+            {
+                Death();
+            }
+
             timer = 0;
         }
         timer += Time.deltaTime;
@@ -125,6 +141,7 @@ public class SnakeMove : MonoBehaviour
 
     private void foodEatten(GameObject temp)
     {
+        hunger = 0;
         TileController tC = temp.transform.parent.gameObject.GetComponent<TileController>();
         if (tC != null)
         {
@@ -160,7 +177,7 @@ public class SnakeMove : MonoBehaviour
                 Death();
             }
 
-            GameObject[] F = GameObject.FindGameObjectsWithTag(foodTag);
+            /*GameObject[] F = GameObject.FindGameObjectsWithTag(foodTag);
             if (F.Length != 0)
             {
                 foreach (GameObject gObj in F)
@@ -174,7 +191,7 @@ public class SnakeMove : MonoBehaviour
 
                     }
                 }
-            }
+            }*/
 
         }
     }
@@ -208,8 +225,24 @@ public class SnakeMove : MonoBehaviour
 
     private void Death()
     {
-        Instantiate(blood, DeBody[0].transform.position, Quaternion.identity);
+        Dead = true;
+        GameObject temp = Instantiate(blood, DeBody[0].transform.position, Quaternion.identity);
+        Destroy(DeBody[0]);
+        Destroy(temp, 2.0f);
         DeBody.Remove(DeBody[0]);
-        Debug.Log((DeBody.Count));
+        if(DeBody.Count == 0)
+        {
+            Destroy(this);
+        }
+    }
+
+    private void changeSpeed()
+    {
+        hunger += 1;
+        moveSpeed = initialSpeed + (hunger * 0.2f) + ((DeBody.Count - 3) * 0.1f);
+        if(moveSpeed > maxSpeed)
+        {
+            moveSpeed = maxSpeed;
+        }
     }
 }
