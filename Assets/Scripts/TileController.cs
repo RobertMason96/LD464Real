@@ -10,6 +10,7 @@ public class TileController : MonoBehaviour
     private float timer;
     public int foodMax;
     public string foodTag;
+    public float groundSize;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +40,10 @@ public class TileController : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag(foodTag).Length < foodMax)
         {
-            int maxGrid = 9;
+            int maxGrid = (int) Mathf.Floor(groundSize / gridSize);
             int xPos = Random.Range(-maxGrid + 1, maxGrid);
             int zPos = Random.Range(-maxGrid + 1, maxGrid);
-            GameObject temp = Instantiate(food, this.transform.position + new Vector3(xPos * gridSize, 10, zPos * gridSize), Quaternion.identity);
+            GameObject temp = Instantiate(food, this.transform.position + new Vector3(xPos * gridSize, 10, zPos * gridSize), Quaternion.Euler(-90,0,0));
             temp.transform.parent = this.transform;
         }
     }
