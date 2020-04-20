@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class UIStuff : MonoBehaviour
 {
     public GameObject mainmenu;
@@ -90,5 +92,15 @@ public class UIStuff : MonoBehaviour
             }
         }
         tutorial.sprite = tutorials[currentScreen];
+    }
+
+    public void playButton()
+    {
+        SceneManager.LoadScene("DavidsScene", LoadSceneMode.Single);
+    }
+
+    public void quitButton()
+    {
+        Application.Quit();
     }
 }

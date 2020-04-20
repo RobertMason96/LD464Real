@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class DeathScreenController : MonoBehaviour
 {
     public GameObject mainmenu;
@@ -20,14 +20,14 @@ public class DeathScreenController : MonoBehaviour
     }
     public void openmainmenu()
     {
-        Debug.Log("Go to Mainmenu");
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
     public void openplayagain()
     {
-        Debug.Log("Go to Playagain");
+        SceneManager.LoadScene("DavidsScene", LoadSceneMode.Single);
     }
     public void openquit()
     {
-        Debug.Log("Go to Quit");
+        Application.Quit();
     }
 }
