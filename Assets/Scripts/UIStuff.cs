@@ -121,7 +121,10 @@ public class UIStuff : MonoBehaviour
         SceneManager.LoadScene("DavidsSceneHard", LoadSceneMode.Single);
     }
 
-
+    public void AltButton()
+    {
+        SceneManager.LoadScene("RobertScene", LoadSceneMode.Single);
+    }
     public void quitButton()
     {
         Application.Quit();

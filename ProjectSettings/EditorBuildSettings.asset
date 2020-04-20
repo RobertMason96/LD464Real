@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DavidsSceneEasy.unity
     guid: 3466d282337366d40979519bbb4ef02f
+  - enabled: 1
+    path: Assets/Scenes/RobertScene.unity
+    guid: ebbce56c39fea024bb39b8188c97d9bf
   m_configObjects: {}

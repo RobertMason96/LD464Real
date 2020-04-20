@@ -833,8 +833,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   food: {fileID: 3290815365182278669, guid: 3aab506c04cdf874eae0859686497ebe, type: 3}
   gridSize: 2
-  dropTime: 15
-  foodMax: 3
+  dropTime: 3
+  foodMax: 6
   foodTag: Pickup
   groundSize: 18
 --- !u!4 &1413844220
