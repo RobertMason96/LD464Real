@@ -1441,6 +1441,7 @@ MonoBehaviour:
   dropTime: 15
   foodMax: 3
   foodTag: Pickup
+  groundSize: 18
 --- !u!4 &1413844220
 Transform:
   m_ObjectHideFlags: 0
