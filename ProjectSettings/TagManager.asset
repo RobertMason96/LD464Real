@@ -10,6 +10,7 @@ TagManager:
   - SnakeTail
   - Food
   - World
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,6 @@ TagManager:
   - Holding
   - Ignore Layers
   - SnakeHead
-  - 
-  - 
   - 
   - 
   - 
