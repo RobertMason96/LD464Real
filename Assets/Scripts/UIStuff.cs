@@ -96,7 +96,7 @@ public class UIStuff : MonoBehaviour
 
     public void playButton()
     {
-        SceneManager.LoadScene("DavidsScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("DavidsScene2", LoadSceneMode.Single);
     }
 
     public void quitButton()

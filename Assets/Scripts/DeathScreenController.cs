@@ -24,7 +24,7 @@ public class DeathScreenController : MonoBehaviour
     }
     public void openplayagain()
     {
-        SceneManager.LoadScene("DavidsScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("DavidsScene2", LoadSceneMode.Single);
     }
     public void openquit()
     {
