@@ -17,6 +17,8 @@ public class SnakeMove : MonoBehaviour
     //Food
     private GameObject food;
 
+    public string foodTag;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -157,7 +159,7 @@ public class SnakeMove : MonoBehaviour
                 Debug.Log((DeBody.Count - 3));
             }
 
-            GameObject[] F = GameObject.FindGameObjectsWithTag("Food");
+            GameObject[] F = GameObject.FindGameObjectsWithTag(foodTag);
             if (F.Length != 0)
             {
                 foreach (GameObject gObj in F)
@@ -182,7 +184,7 @@ public class SnakeMove : MonoBehaviour
         int i = 0;
         int x = 0;
         GameObject temp = null;
-        GameObject[] F = GameObject.FindGameObjectsWithTag("Food");
+        GameObject[] F = GameObject.FindGameObjectsWithTag(foodTag);
         if (F.Length != 0)
         {
             float shortestDistance = (DeBody[0].transform.position - F[0].transform.position).magnitude;
