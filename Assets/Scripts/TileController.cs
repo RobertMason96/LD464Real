@@ -7,13 +7,13 @@ public class TileController : MonoBehaviour
     public GameObject food;
     public float gridSize;
     public float dropTime;
-    private float timer = 0;
-    private int foodNum = 0;
+    private float timer;
     public int foodMax;
+    public string foodTag;
     // Start is called before the first frame update
     void Start()
     {
-        
+        timer = dropTime;
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class TileController : MonoBehaviour
     {
         if(timer >= dropTime)
         {
-            if (foodNum < foodMax)
+            if (GameObject.FindGameObjectsWithTag(foodTag).Length < foodMax)
             {
                 createNewFood();
             }
@@ -32,20 +32,18 @@ public class TileController : MonoBehaviour
     public void replaceFood(GameObject temp)
     {
         Destroy(temp.transform.gameObject);
-        foodNum--;
         createNewFood();
     }
 
     private void createNewFood()
     {
-        if (foodNum < foodMax)
+        if (GameObject.FindGameObjectsWithTag(foodTag).Length < foodMax)
         {
             int maxGrid = 9;
             int xPos = Random.Range(-maxGrid + 1, maxGrid);
             int zPos = Random.Range(-maxGrid + 1, maxGrid);
             GameObject temp = Instantiate(food, this.transform.position + new Vector3(xPos * gridSize, 10, zPos * gridSize), Quaternion.identity);
             temp.transform.parent = this.transform;
-            foodNum++;
         }
     }
 }
