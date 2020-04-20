@@ -1,23 +1,11 @@
 fileFormatVersion: 2
-guid: 3aa2f11b71035364d9bddda184e22d22
+guid: 27f4f9372b995924cbfde04f71984d3d
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
-      74: 1168826620826061146
-    second: Armature|_Poser
-  - first:
-      74: 4781951162920444690
-    second: Armature|ArmatureAction
-  - first:
-      74: 1140997711532810638
-    second: Armature|ArmsLift
-  - first:
-      74: 9087390404714493579
-    second: Armature|ArmsLift.001
-  - first:
-      74: 8349542763059015795
-    second: Armature|Walk
+      74: -623603649343465320
+    second: Scene
   externalObjects: {}
   materials:
     materialImportMode: 1
