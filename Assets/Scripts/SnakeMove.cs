@@ -19,6 +19,8 @@ public class SnakeMove : MonoBehaviour
 
     public string foodTag;
 
+    public GameObject blood;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class SnakeMove : MonoBehaviour
         DeBody.Add(GameObject.FindGameObjectWithTag("SnakeHead"));
         DeBody.Add(GameObject.FindGameObjectWithTag("SnakePart"));
         DeBody.Add(GameObject.FindGameObjectWithTag("SnakeTail"));
-        movementDirection = -DeBody[0].transform.right;
+        movementDirection = -DeBody[0].transform.right * gridSize;
         timer = 0;
         food = findFood();
         getDirections();
@@ -155,8 +157,7 @@ public class SnakeMove : MonoBehaviour
             oldPos = newPos;
             if(newPos == DeBody[0].transform.position)
             {
-                Debug.Log("Dead");
-                Debug.Log((DeBody.Count - 3));
+                Death();
             }
 
             GameObject[] F = GameObject.FindGameObjectsWithTag(foodTag);
@@ -164,9 +165,9 @@ public class SnakeMove : MonoBehaviour
             {
                 foreach (GameObject gObj in F)
                 {
-                    moveDir = new Vector3(gObj.transform.position.x - newPos.x, newPos.y, gObj.transform.position.z - newPos.z);
+                    moveDir = new Vector3(gObj.transform.position.x - newPos.x, gObj.transform.position.y - newPos.y, gObj.transform.position.z - newPos.z);
 
-                    if (Mathf.Abs(moveDir.x) < gridSize && Mathf.Abs(moveDir.z) < gridSize)
+                    if (Mathf.Abs(moveDir.x) < gridSize && Mathf.Abs(moveDir.z) < gridSize && Mathf.Abs(moveDir.y) < gridSize)
                     {
 
                         foodEatten(gObj);
@@ -192,13 +193,23 @@ public class SnakeMove : MonoBehaviour
             {
                 if (shortestDistance > (DeBody[0].transform.position - gObj.transform.position).magnitude)
                 {
-                    i = x;
-                    shortestDistance = (DeBody[0].transform.position - gObj.transform.position).magnitude;
+                    if (Mathf.Abs((DeBody[0].transform.position - gObj.transform.position).y) < gridSize)
+                    {
+                        i = x;
+                        shortestDistance = (DeBody[0].transform.position - gObj.transform.position).magnitude;
+                    }
                 }
                 x++;
             }
             temp = F[i];
         }
         return temp;
+    }
+
+    private void Death()
+    {
+        Instantiate(blood, DeBody[0].transform.position, Quaternion.identity);
+        DeBody.Remove(DeBody[0]);
+        Debug.Log((DeBody.Count));
     }
 }
