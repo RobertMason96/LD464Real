@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class SnakeMove : MonoBehaviour
 {
     private List<GameObject> DeBody;
@@ -12,7 +12,7 @@ public class SnakeMove : MonoBehaviour
     private float hunger;
     private float timer;
     private bool Dead;
-
+    private bool GameOver;
     //Spacing of the grid in the world
     public float gridSize;
 
@@ -25,9 +25,25 @@ public class SnakeMove : MonoBehaviour
 
     public GameObject blood;
 
+    public int Score;
+
+    public AudioSource aS;
+    public AudioClip deathSound;
+    public AudioClip eatSound;
+
+    public Text ScoreText;
+    public GameObject DeathScreen;
+    public Text AliveScoreText;
+    public GameObject ScoreScreen;
+
+    public Text HowText;
+
     // Start is called before the first frame update
     void Start()
     {
+        Score = 0;
+        AliveScoreText.text = "Score : " + Score;
+        GameOver = false;
         Dead = false;
         hunger = 0;
         moveSpeed = initialSpeed;
@@ -141,6 +157,11 @@ public class SnakeMove : MonoBehaviour
 
     private void foodEatten(GameObject temp)
     {
+        Score++;
+        AliveScoreText.text = "Score : " + Score; 
+        aS.clip = eatSound;
+        aS.Play();
+
         hunger = 0;
         TileController tC = temp.transform.parent.gameObject.GetComponent<TileController>();
         if (tC != null)
@@ -225,6 +246,18 @@ public class SnakeMove : MonoBehaviour
 
     private void Death()
     {
+        if (!Dead)
+        {
+            aS.clip = deathSound;
+            aS.Play();
+            if (!GameOver)
+            {
+                GameOver = true;
+                Debug.Log("Eatten");
+                doUIStuff("The snake ate itself. You are a bad owner. ");
+            }
+            
+        }
         Dead = true;
         GameObject temp = Instantiate(blood, DeBody[0].transform.position, Quaternion.identity);
         Destroy(DeBody[0]);
@@ -244,5 +277,26 @@ public class SnakeMove : MonoBehaviour
         {
             moveSpeed = maxSpeed;
         }
+    }
+
+    public void PlayerEatten()
+    {
+        if (!GameOver)
+        {
+            GameOver = true;
+            aS.clip = eatSound;
+            aS.Play();
+            doUIStuff("You were eaten by your snake. ");
+            Debug.Log(Score);
+        }
+    }
+
+    private void doUIStuff(string TOD)
+    {
+        DeathScreen.SetActive(true);
+        ScoreScreen.SetActive(false);
+        string message = "Score : " + Score;
+        ScoreText.text = message;
+        HowText.text = TOD;
     }
 }

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 461921148320876712}
   - component: {fileID: 7388883911940097778}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SnakeHead 1
-  m_TagString: SnakePart
+  m_TagString: SnakeHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 7268127337428698600}
   - component: {fileID: 962326772255170577}
   - component: {fileID: 8454665009941253166}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HeadTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4621801051969834827}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SnakeHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 7192214153367870264}
   - component: {fileID: 2293615952037562366}
   - component: {fileID: 4867454520044971691}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToothTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 3731681550128197340}
   - component: {fileID: 1141242587098274988}
   - component: {fileID: 6268058793195794159}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToothBottomRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 2002860588452116317}
   - component: {fileID: 3112579674888634935}
   - component: {fileID: 5793395910031290189}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToothTopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 53559136922993615}
   - component: {fileID: 8244813786761801801}
   - component: {fileID: 169012376880010434}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ToothBottLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 6839535033775020489}
   - component: {fileID: 6458934301356207873}
   - component: {fileID: 958387675140314643}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HeadBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 2454960029240571654}
   - component: {fileID: 2688929079794106700}
   - component: {fileID: 8667445965300558279}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 6298532399744111170}
   - component: {fileID: 8203339768828325165}
   - component: {fileID: 6569126469549718716}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
