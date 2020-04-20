@@ -30,8 +30,14 @@ public class PlayerController : MonoBehaviour
 
     public float crashTime = 0.2f;
 
+    public Animator animator;
+
+    
+
+
     bool canMove = true;
 
+    bool running = false;
 
     public AudioClip pain;
 
@@ -77,8 +83,22 @@ public class PlayerController : MonoBehaviour
             {
                 inplaneInput.y--;
             }
-
-
+            if(inplaneInput != new Vector2(0, 0))
+            {
+                if(!running)
+                {
+                    animator.SetBool("Start", true);
+                }
+                running = true;
+            }            
+            else
+            {
+                if(running)
+                {
+                    animator.SetBool("Start", false);
+                }
+                running = false;
+            }
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * jumpHeight, Color.yellow);
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * pickupLength, Color.red);
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * collisionLength, Color.blue);
@@ -121,8 +141,8 @@ public class PlayerController : MonoBehaviour
                         {
                             holderObject = hit.transform.gameObject;
                             holderObject.layer = LayerMask.NameToLayer("Player");
-                            
-
+                            controller.center = new Vector3(controller.center.x, controller.center.y, 0.52f);
+                            controller.radius = 0.96f;
                             
                         }
                         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
@@ -138,8 +158,8 @@ public class PlayerController : MonoBehaviour
                 else
                 {
 
-                    
-                    
+                    controller.radius = 0.5f;
+                    controller.center = new Vector3(controller.center.x, controller.center.y, 0f);
                     holderObject.layer = LayerMask.NameToLayer("Default");
 
                     holderObject = null;
@@ -222,11 +242,10 @@ public class PlayerController : MonoBehaviour
 
 
         controller.Move(velocity * Time.fixedDeltaTime);
-        
+
         //Add in velocity
-
-
-        
-        
+        float blend = inplaneVelocity.magnitude / maxSpeed;
+        animator.SetFloat("Blend",blend);
+                
     }
 }
