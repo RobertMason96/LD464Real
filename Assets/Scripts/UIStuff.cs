@@ -9,12 +9,15 @@ public class UIStuff : MonoBehaviour
     public GameObject mainmenu;
     public GameObject information;
     public GameObject credits;
+    public GameObject play;
 
     public Image tutorial;
     public Sprite[] tutorials;
     int currentScreen = 0;
     public GameObject NextBtn;
     public GameObject PreviousBtn;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,7 @@ public class UIStuff : MonoBehaviour
         mainmenu.SetActive(true);
         information.SetActive(false);
         credits.SetActive(false);
+        play.SetActive(false);
     }
 
     public void openinformation()
@@ -48,6 +52,7 @@ public class UIStuff : MonoBehaviour
         information.SetActive(true);
         mainmenu.SetActive(false);        
         credits.SetActive(false);
+        play.SetActive(false);
     }
 
     public void opencredits()
@@ -55,7 +60,7 @@ public class UIStuff : MonoBehaviour
         credits.SetActive(true);
         mainmenu.SetActive(false);
         information.SetActive(false);
-        
+        play.SetActive(false);
 
     }
 
@@ -96,8 +101,26 @@ public class UIStuff : MonoBehaviour
 
     public void playButton()
     {
-        SceneManager.LoadScene("DavidsScene2", LoadSceneMode.Single);
+        //SceneManager.LoadScene("DavidsScene2", LoadSceneMode.Single);
+        play.SetActive(true);
+        mainmenu.SetActive(false);
+        information.SetActive(false);
+        credits.SetActive(false);
     }
+
+    public void EasyButton()
+    {
+        SceneManager.LoadScene("DavidsSceneEasy", LoadSceneMode.Single);
+    }
+    public void MediumButton()
+    {
+        SceneManager.LoadScene("DavidsSceneMedium", LoadSceneMode.Single);
+    }
+    public void HardButton()
+    {
+        SceneManager.LoadScene("DavidsSceneHard", LoadSceneMode.Single);
+    }
+
 
     public void quitButton()
     {

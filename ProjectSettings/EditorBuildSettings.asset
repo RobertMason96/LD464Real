@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DavidsScene2.unity
     guid: ccf924c9840a2c14eb5e4afe9289766f
+  - enabled: 1
+    path: Assets/Scenes/DavidsSceneMedium.unity
+    guid: 63826c67a40826d49bd66d951cac2c04
+  - enabled: 1
+    path: Assets/Scenes/DavidsSceneHard.unity
+    guid: 33a19114aacd15840ace1e3974edce8f
+  - enabled: 1
+    path: Assets/Scenes/DavidsSceneEasy.unity
+    guid: 3466d282337366d40979519bbb4ef02f
   m_configObjects: {}
