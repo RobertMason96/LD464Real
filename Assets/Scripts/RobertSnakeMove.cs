@@ -70,7 +70,7 @@ public class RobertSnakeMove : MonoBehaviour
     {
         food = findFood();
 
-        if((Mathf.Abs(DeBody[0].transform.position.x)>(groundsize*gridSize/2))||(Mathf.Abs(DeBody[0].transform.position.y) > (groundsize * gridSize/2)))
+        if((Mathf.Abs(DeBody[0].transform.position.x)>(groundsize*gridSize/2))||(Mathf.Abs(DeBody[0].transform.position.z) > (groundsize * gridSize/2)))
         {
             Death();
         }

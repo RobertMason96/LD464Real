@@ -6,28 +6,48 @@ public class RobertSnakeCollider : MonoBehaviour
 {
 
 
+    RobertSnakeMove RSM=null;
 
-    void OnTriggerEnter(Collider collision)
+    public void Start()
     {
-        if (collision.gameObject.tag == "Wall")
+        bool found = false;
+        GameObject currentObject = this.gameObject;
+        while (!found)
         {
-            bool found = false;
-            GameObject currentObject = this.gameObject;
-            while (!found)
+            if (currentObject.transform.parent != null)
             {
-                if (currentObject.transform.parent != null)
-                {
-                    currentObject = currentObject.transform.parent.gameObject;
-                }
-                else
-                {
-                    found = true;
-                }
+                currentObject = currentObject.transform.parent.gameObject;
             }
-            if(currentObject.GetComponent<RobertSnakeMove>()!=null)
+            else
             {
-                currentObject.GetComponent<RobertSnakeMove>().Death();
+                found = true;
             }
         }
+        
+        if (currentObject.GetComponent<RobertSnakeMove>() != null)
+        {
+            RSM = currentObject.GetComponent<RobertSnakeMove>();
+            
+        }
+
+
     }
+    /*
+    void OnCollisionEnter(Collider collision)
+    {
+        Debug.Log("Collision");
+        if (collision.gameObject.tag == "Wall")
+        {
+            if(RSM!=null)
+            {
+                RSM.Death();
+            }
+            else
+            {
+                Debug.Log("ERROR NO RSM");
+            }
+            
+
+        }
+    }*/
 }
