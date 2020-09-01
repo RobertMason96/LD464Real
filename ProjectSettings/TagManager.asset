@@ -11,6 +11,8 @@ TagManager:
   - Food
   - World
   - Wall
+  - SnakeDest
+  - Tiles
   layers:
   - Default
   - TransparentFX
